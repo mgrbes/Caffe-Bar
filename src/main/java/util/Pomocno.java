@@ -12,7 +12,7 @@ package util;
 public class Pomocno {
     
     public static String getNazivAplikacije(){
-        return "Caffe Bar APP";
+        return "Caffe Bar Application";
     }
     
     public static void PocetniInsert(){

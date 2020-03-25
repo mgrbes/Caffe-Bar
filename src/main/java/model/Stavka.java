@@ -5,10 +5,7 @@
  */
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -20,8 +17,7 @@ import javax.persistence.ManyToOne;
 public class Stavka extends Entitet{
     @ManyToOne
     private Pice pice;
-    @ManyToMany
-    private List<Racun>racuni=new ArrayList<>();
+    private Integer kolicina;
 
     public Pice getPice() {
         return pice;
@@ -31,12 +27,14 @@ public class Stavka extends Entitet{
         this.pice = pice;
     }
 
-    public List<Racun> getRacuni() {
-        return racuni;
+    public Integer getKolicina() {
+        return kolicina;
     }
 
-    public void setRacuni(List<Racun> racuni) {
-        this.racuni = racuni;
+    public void setKolicina(Integer kolicina) {
+        this.kolicina = kolicina;
     }
+
+    
     
 }

@@ -5,13 +5,15 @@
  */
 package model;
 
-import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
- * @author Grbeš
- */@Entity
-public class Zaposlenik extends Osoba{
+ * @author marko
+ */
+@MappedSuperclass
+public abstract class Osoba extends Entitet{
+    
     private String ime;
     private String prezime;
     private String oib;
@@ -48,5 +50,7 @@ public class Zaposlenik extends Osoba{
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    
     
 }

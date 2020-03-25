@@ -5,8 +5,7 @@
  */
 package controller;
 
-import java.util.List;
-import model.Zaposlenik;
+import model.Osoba;
 import util.EdunovaException;
 import util.Pomocno;
 
@@ -14,23 +13,22 @@ import util.Pomocno;
  *
  * @author marko
  */
-public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik>{
-
-    public ObradaZaposlenik(Zaposlenik entitet) {
+public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
+    
+    public ObradaOsoba(T entitet) {
         super(entitet);
-    }
+    }  
 
-    public ObradaZaposlenik() {
+    public ObradaOsoba() {
         super();
     }
+    
+    
 
-    
-    
-    
-    
+    @Override
     protected void kontrolaCreate() throws EdunovaException {
-       super.kontrolaCreate();
-       kontrolaIban();
+        kontrolaOib();
+        kontrolaEmail();
     }
 
     @Override
@@ -42,30 +40,17 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik>{
     protected void kontrolaDelete() throws EdunovaException {
         
     }
-    
+
     private void kontrolaOib() throws EdunovaException{
         if(!Pomocno.isOibValjan(entitet.getOib())){
             throw new EdunovaException("OIB nije valjan");
         }
     }
-    
 
-    @Override
-    public List<Zaposlenik> getPodaci() {
-        return session.createQuery("from Zaposlenik").list();
-    }
-
-    @Override
-    protected void nakonSpremanja() throws EdunovaException {
-        
-    }
-    
-     protected void kontrolaEmail()  throws EdunovaException{
+    protected void kontrolaEmail()  throws EdunovaException{
        
     }
 
-    private void kontrolaIban() {
-        
-    }
+    
     
 }

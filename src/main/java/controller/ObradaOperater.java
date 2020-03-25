@@ -15,7 +15,7 @@ import util.EdunovaException;
  *
  * @author marko
  */
-public class ObradaOperater extends ObradaZaposlenik{
+public class ObradaOperater extends ObradaOsoba<Operater>{
 
     public ObradaOperater() {
         super();

@@ -5,9 +5,12 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,7 +25,10 @@ public class Racun extends Entitet{
     private Integer brojRacuna;
     
     private Integer pdv;
-
+    
+    @OneToMany
+    private List<Stavka> stavke=new ArrayList<>();
+    
     public Integer getPdv() {
         return pdv;
     }

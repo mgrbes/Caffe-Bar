@@ -6,49 +6,34 @@
 package controller;
 
 import java.util.List;
-import model.Dobavljac;
+import model.Stavka;
 import util.EdunovaException;
 
 /**
  *
  * @author marko
  */
-public class ObradaDobavljac extends Obrada<Dobavljac>{
+public class ObradaStavka extends Obrada<Stavka>{
 
-    public ObradaDobavljac(Dobavljac entitet) {
-        super(entitet);
-    }
-
-    public ObradaDobavljac() {
-        super();
-    }
-
-    
-    
-    
     @Override
     protected void kontrolaCreate() throws EdunovaException {
-      
     }
 
     @Override
     protected void kontrolaUpdate() throws EdunovaException {
-        
     }
 
     @Override
     protected void kontrolaDelete() throws EdunovaException {
-        
     }
 
     @Override
-    public List<Dobavljac> getPodaci() {
-       return session.createQuery("from Dobavljac").list();
+    public List<Stavka> getPodaci() {
+        return session.createQuery("from Stavka").list();
     }
 
     @Override
     protected void nakonSpremanja() throws EdunovaException {
-       
     }
     
 }
