@@ -7,6 +7,8 @@ package hibernate;
 
 import util.HibernateUtil;
 import org.hibernate.Session;
+import util.Pomocno;
+import view.SplashScreen;
 /**
  *
  * @author Grbeš
@@ -14,7 +16,8 @@ import org.hibernate.Session;
 public class Start {
 
     public Start() {
-        HibernateUtil.getSessionFactory().openSession();
+        Pomocno.pocetniInsert();
+        new SplashScreen().setVisible(true);
     }
     
     public static void main(String[] args) {
