@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 public class Stavka extends Entitet{
     @ManyToOne
     private Pice pice;
-    private Integer kolicina;
+    
 
     public Pice getPice() {
         return pice;
@@ -27,13 +27,7 @@ public class Stavka extends Entitet{
         this.pice = pice;
     }
 
-    public Integer getKolicina() {
-        return kolicina;
-    }
-
-    public void setKolicina(Integer kolicina) {
-        this.kolicina = kolicina;
-    }
+   
 
     
     

@@ -15,11 +15,20 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Pice extends Entitet{
+    private String naziv;
     private Integer kolicina;
     private String vrsta;
     private BigDecimal cijena;
     
 
+     public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+    
     public Integer getKolicina() {
         return kolicina;
     }
