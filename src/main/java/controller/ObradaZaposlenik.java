@@ -27,10 +27,10 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik>{
     
     
     
-    
+    @Override
     protected void kontrolaCreate() throws EdunovaException {
        super.kontrolaCreate();
-       kontrolaIban();
+       kontrolaBrojUgovora();
     }
 
     @Override
@@ -43,16 +43,23 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik>{
         
     }
     
-    private void kontrolaOib() throws EdunovaException{
-        if(!Pomocno.isOibValjan(entitet.getOib())){
-            throw new EdunovaException("OIB nije valjan");
-        }
-    }
     
+    
+    private void kontrolaBrojUgovora() throws EdunovaException{
+        
+    }
 
     @Override
     public List<Zaposlenik> getPodaci() {
         return session.createQuery("from Zaposlenik").list();
+    }
+    
+    public List<Zaposlenik> getPodaci(String uvjet){
+        return session.createQuery("from Zaposlenik z "
+                + " where concat(z.ime, ' ', z.prezime) like :uvjet "
+                + " or concat(z.prezime, ' ', z.ime) like :uvjet ")
+                .setParameter("uvjet", "%" + uvjet + "%")
+                .setMaxResults(20).list();
     }
 
     @Override
@@ -60,12 +67,8 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik>{
         
     }
     
-     protected void kontrolaEmail()  throws EdunovaException{
-       
-    }
+     
 
-    private void kontrolaIban() {
-        
-    }
+    
     
 }
