@@ -5,17 +5,42 @@
  */
 package view;
 
+import controller.ObradaPice;
+import controller.ObradaRacun;
+import controller.ObradaZaposlenik;
+import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import model.Pice;
+import model.Racun;
+import model.Zaposlenik;
+import util.EdunovaException;
+import util.Pomocno;
+
 /**
  *
  * @author marko
  */
 public class ViewRacun extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ViewRacun
-     */
+    private final ObradaRacun obrada;
+    private final ObradaPice obradaPice;
+    private final ObradaZaposlenik obradaZaposlenik;
+    private BigDecimal ukupnaCijena;
+    
     public ViewRacun() {
+        ukupnaCijena=BigDecimal.ZERO;
         initComponents();
+        obrada=new ObradaRacun();
+        obradaPice=new ObradaPice();
+        obradaZaposlenik=new ObradaZaposlenik();
+        ucitaj();
+        //ucitajPice();
+        ucitajZaposlenike();
+        obrada.setEntitet(new Racun());
     }
 
     /**
@@ -27,57 +52,329 @@ public class ViewRacun extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmbZaposlenik = new javax.swing.JComboBox<>();
+        txtUvjet = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstPodaci = new javax.swing.JList<>();
+        btnTrazi = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
+        txtCijena = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cmbPdv = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtUkupnaCijena = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        cmbZaposlenik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbZaposlenikActionPerformed(evt);
+            }
+        });
+
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
+
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
+
+        btnTrazi.setText("Traži");
+        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Cijena Pića");
+
+        jLabel2.setText("Zaposlenik");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("OK");
+
+        jLabel3.setText("PDV");
+
+        cmbPdv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25", "13", " " }));
+        cmbPdv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPdvActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Ukupna Cijena");
+
+        txtUkupnaCijena.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUkupnaCijenaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(cmbZaposlenik, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 26, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbPdv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(btnTrazi)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtUkupnaCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(333, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTrazi)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbZaposlenik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPdv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUkupnaCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnObrisi)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(42, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            ucitajZaposlenike();
+        }
+    }//GEN-LAST:event_txtUvjetKeyPressed
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+        obradaPice.setEntitet(lstPodaci.getSelectedValue());
+        if (obrada.getEntitet() == null) {
+            return;
+        }
+        postaviVrijednosti();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
+        ucitajZaposlenike();
+    }//GEN-LAST:event_btnTraziActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if (obrada.getEntitet() == null) {
+            JOptionPane.showMessageDialog(null, "Prvo odaberite stavku");
+            return;
+        }
+        try {
+            obrada.delete();
+            ucitajZaposlenike();
+        } catch (EdunovaException e) {
+            JOptionPane.showMessageDialog(null, e.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void cmbPdvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPdvActionPerformed
+       
+    }//GEN-LAST:event_cmbPdvActionPerformed
+
+    private void cmbZaposlenikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbZaposlenikActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbZaposlenikActionPerformed
+
+    private void txtUkupnaCijenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUkupnaCijenaMouseClicked
+        if (evt.getClickCount() == 2) {
+           
+            
+           txtUkupnaCijena.setText(ukupnaCijena.toString()+Pomocno.getFormatDecimalniBroj(obradaPice.getEntitet().getCijena()));
+        }
+    }//GEN-LAST:event_txtUkupnaCijenaMouseClicked
+private void zbrojiCijene() {
+        try {
+            DefaultListModel<Pice> m = (DefaultListModel<Pice>) lstPodaci.getModel();
+            BigDecimal ukupno = BigDecimal.ZERO;
+
+            for (int i = 0; i < m.getSize(); i++) {
+                ukupno = ukupno.add(m.get(i).getCijena());
+
+            }
+            txtUkupnaCijena.setText(ukupno.toString());
+        } catch (Exception e) {
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewRacun().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnTrazi;
+    private javax.swing.JComboBox<String> cmbPdv;
+    private javax.swing.JComboBox<Zaposlenik> cmbZaposlenik;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Pice> lstPodaci;
+    private javax.swing.JTextField txtCijena;
+    private javax.swing.JTextField txtUkupnaCijena;
+    private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
+
+    /*private void ucitaj() {
+        DefaultListModel<Racun> m = new DefaultListModel<>();
+        obrada.getPodaci().forEach(s -> m.addElement(s));
+        lstPodaci.setModel(m);
+    }*/
+
+    private void ucitajZaposlenike() {
+      DefaultComboBoxModel<Zaposlenik> m = new DefaultComboBoxModel<>();
+        new ObradaZaposlenik().getPodaci().forEach(s -> m.addElement(s));
+        cmbZaposlenik.setModel(m);
+    }
+
+    private void postaviVrijednosti() {
+        txtCijena.setText(Pomocno.getFormatDecimalniBroj(obradaPice.getEntitet().getCijena()));
+        
+        //postaviZaposlenike();
+        
+    }
+    
+    private void postaviZaposlenike() {
+        for (int i = 0; i < cmbZaposlenik.getModel().getSize(); i++) {
+            if (cmbZaposlenik.getModel().getElementAt(i).getSifra().equals(
+                    obrada.getEntitet().getZaposlenik().getSifra())) {
+                cmbZaposlenik.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+    
+   
+
+    
+
+    private void ucitaj() {
+        DefaultListModel<Pice> m=new DefaultListModel<>();
+        obradaPice.getPodaci(txtUvjet.getText().trim()).forEach(s->m.addElement(s));
+        lstPodaci.setModel(m);
+    }
+    
+     private void ucitajVrijednostiPice() {
+       
+       obradaPice.getEntitet().setCijena(Pomocno.getDecimalniBrojIzStringa(txtCijena.getText()));
+    }
+     
+     
+     private void lstPolazniciUSkoliMouseClicked(java.awt.event.MouseEvent evt) {                                                
+        
+        if (evt.getClickCount() == 2) {
+           
+            
+           txtUkupnaCijena.setText("ivan");
+             
+            
+    
+            
+          /*  Clan c = new Clan();
+            c.setPolaznik(p);
+            c.setGrupa(obrada.getEntitet());
+            c.setDatumUpisa(new Date());
+            DefaultListModel<Clan> m;
+            
+            try {
+                m
+                        = (DefaultListModel<Clan>) lstPolazniciUGrupi.getModel();
+            } catch (Exception e) {
+                m = new DefaultListModel<>();
+                lstPolazniciUGrupi.setModel(m);
+            }
+            
+            m.addElement(c);
+            lstPolazniciUGrupi.repaint();*/
+            
+        }
+    }                
+     
 }
