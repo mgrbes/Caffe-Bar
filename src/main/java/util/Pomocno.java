@@ -95,10 +95,10 @@ public class Pomocno {
         }
         
         Pice p1=new Pice();
-        p1.setNaziv("Pan");
+        p1.setNaziv("Jack Daniels");
         p1.setCijena(new BigDecimal(10));
         p1.setKolicina(4);
-        p1.setVrsta("Pivo");
+        p1.setVrsta("Strana Žesta");
         
         ObradaPice obradaPice1=new ObradaPice(p1);
         
@@ -108,6 +108,34 @@ public class Pomocno {
             System.out.println(ex.getPoruka());
         }
         
+        
+        Pice p2=new Pice();
+        p2.setNaziv("Čaj od šumskog voća");
+        p2.setCijena(new BigDecimal(10));
+        p2.setKolicina(4);
+        p2.setVrsta("Čaj");
+        
+        ObradaPice obradaPice2=new ObradaPice(p2);
+        
+        try {
+            obradaPice2.create();
+        } catch (EdunovaException ex) {
+            System.out.println(ex.getPoruka());
+        }
+        
+        Pice p3=new Pice();
+        p3.setNaziv("Medica");
+        p3.setCijena(new BigDecimal(10));
+        p3.setKolicina(4);
+        p3.setVrsta("Domaća Žesta");
+        
+        ObradaPice obradaPice3=new ObradaPice(p3);
+        
+        try {
+            obradaPice3.create();
+        } catch (EdunovaException ex) {
+            System.out.println(ex.getPoruka());
+        }
         
         
         Racun racun=new Racun();
@@ -127,7 +155,7 @@ public class Pomocno {
         
         Stavka stavka=new Stavka();
         stavka.setPice(p);
-        stavka.setPice(p1);
+        stavka.setPice(p2);
         
         
         ObradaStavka obradaStavka=new ObradaStavka();
@@ -243,10 +271,10 @@ public class Pomocno {
            
     }
         
-         public static void dodajPolaznika(int ukupno){
+         public static void dodajZaposlenika(int ukupno){
              ObradaZaposlenik oz=new ObradaZaposlenik();
              Zaposlenik z;
-        ViewZaposlenik.Osoba o;
+             ViewZaposlenik.Osoba o;
         for(int i=0;i<ukupno;i++){
             z= new Zaposlenik();
             o=getgenIP();
