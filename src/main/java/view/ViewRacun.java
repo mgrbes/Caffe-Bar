@@ -29,17 +29,19 @@ public class ViewRacun extends javax.swing.JFrame {
     private final ObradaRacun obrada;
     private final ObradaPice obradaPice;
     private final ObradaZaposlenik obradaZaposlenik;
-    private BigDecimal ukupnaCijena;
+    private static BigDecimal ukupnaCijena;
     
     public ViewRacun() {
-        ukupnaCijena=BigDecimal.ZERO;
+        
         initComponents();
+        ukupnaCijena=BigDecimal.ZERO;
         obrada=new ObradaRacun();
         obradaPice=new ObradaPice();
         obradaZaposlenik=new ObradaZaposlenik();
         ucitaj();
         //ucitajPice();
         ucitajZaposlenike();
+        
         obrada.setEntitet(new Racun());
     }
 
@@ -52,6 +54,7 @@ public class ViewRacun extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         cmbZaposlenik = new javax.swing.JComboBox<>();
         txtUvjet = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -66,6 +69,9 @@ public class ViewRacun extends javax.swing.JFrame {
         cmbPdv = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtUkupnaCijena = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -128,6 +134,13 @@ public class ViewRacun extends javax.swing.JFrame {
             }
         });
 
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,26 +164,27 @@ public class ViewRacun extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)))
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtUkupnaCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtUkupnaCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(193, 193, 193)))
+                .addGap(41, 41, 41))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -191,7 +205,7 @@ public class ViewRacun extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbZaposlenik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbPdv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -202,10 +216,13 @@ public class ViewRacun extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUkupnaCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btnObrisi)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -236,20 +253,17 @@ public class ViewRacun extends javax.swing.JFrame {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-        ucitajZaposlenike();
+        ucitajPice();
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        if (obrada.getEntitet() == null) {
+        if (obradaPice.getEntitet() == null) {
             JOptionPane.showMessageDialog(null, "Prvo odaberite stavku");
             return;
         }
-        try {
-            obrada.delete();
-            ucitajZaposlenike();
-        } catch (EdunovaException e) {
-            JOptionPane.showMessageDialog(null, e.getPoruka());
-        }
+        
+            txtUkupnaCijena.setText(Pomocno.getFormatDecimalniBroj(ukupnaCijena.subtract(obradaPice.getEntitet().getCijena())));
+        
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void cmbPdvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPdvActionPerformed
@@ -261,12 +275,20 @@ public class ViewRacun extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbZaposlenikActionPerformed
 
     private void txtUkupnaCijenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUkupnaCijenaMouseClicked
-        if (evt.getClickCount() == 2) {
-           
-            
-           txtUkupnaCijena.setText(ukupnaCijena.toString()+Pomocno.getFormatDecimalniBroj(obradaPice.getEntitet().getCijena()));
-        }
+       
     }//GEN-LAST:event_txtUkupnaCijenaMouseClicked
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        BigDecimal pomocno=BigDecimal.ZERO;
+        
+        if (obradaPice.getEntitet() == null) {
+            JOptionPane.showMessageDialog(null, "Prvo odaberite Pice");
+            return;
+        }
+         ukupnaCijena=pomocno.add(obradaPice.getEntitet().getCijena());
+         txtUkupnaCijena.setText(Pomocno.getFormatDecimalniBroj(ukupnaCijena));
+         pomocno=ukupnaCijena;
+    }//GEN-LAST:event_btnDodajActionPerformed
 private void zbrojiCijene() {
         try {
             DefaultListModel<Pice> m = (DefaultListModel<Pice>) lstPodaci.getModel();
@@ -286,11 +308,13 @@ private void zbrojiCijene() {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JComboBox<String> cmbPdv;
     private javax.swing.JComboBox<Zaposlenik> cmbZaposlenik;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -314,6 +338,13 @@ private void zbrojiCijene() {
         cmbZaposlenik.setModel(m);
     }
 
+    
+    private void ucitajPice(){
+        DefaultListModel<Pice> m=new DefaultListModel<>();
+        obradaPice.getPodaci(txtUvjet.getText().trim()).forEach(s->m.addElement(s));
+        lstPodaci.setModel(m);
+    }
+    
     private void postaviVrijednosti() {
         txtCijena.setText(Pomocno.getFormatDecimalniBroj(obradaPice.getEntitet().getCijena()));
         
