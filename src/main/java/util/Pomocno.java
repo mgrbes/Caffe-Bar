@@ -96,7 +96,7 @@ public class Pomocno {
         
         Pice p1=new Pice();
         p1.setNaziv("Jack Daniels");
-        p1.setCijena(new BigDecimal(10));
+        p1.setCijena(new BigDecimal(12));
         p1.setKolicina(4);
         p1.setVrsta("Strana Žesta");
         
@@ -111,7 +111,7 @@ public class Pomocno {
         
         Pice p2=new Pice();
         p2.setNaziv("Čaj od šumskog voća");
-        p2.setCijena(new BigDecimal(10));
+        p2.setCijena(new BigDecimal(6));
         p2.setKolicina(4);
         p2.setVrsta("Čaj");
         
@@ -125,7 +125,7 @@ public class Pomocno {
         
         Pice p3=new Pice();
         p3.setNaziv("Medica");
-        p3.setCijena(new BigDecimal(10));
+        p3.setCijena(new BigDecimal(8));
         p3.setKolicina(4);
         p3.setVrsta("Domaća Žesta");
         
