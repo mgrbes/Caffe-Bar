@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -26,8 +27,22 @@ public class Racun extends Entitet{
     
     private Integer pdv;
     
-    @OneToMany
-    private List<Stavka> stavke=new ArrayList<>();
+    @ManyToMany
+    private List<Pice> pice;
+
+    public List<Pice> getPice() {
+        return pice;
+    }
+
+    public void setPice(List<Pice> pice) {
+        this.pice = pice;
+    }
+    
+    
+
+    
+    
+    
     
     public Integer getPdv() {
         return pdv;
